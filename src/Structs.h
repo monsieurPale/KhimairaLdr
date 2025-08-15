@@ -1276,6 +1276,7 @@ typedef void(WINAPI* fnSleep)(
 	DWORD dwMilliseconds
 );
 
+typedef BOOL(WINAPI* fnFreeConsole)(void);
 
 #endif // !_STRUCTS_H
 
